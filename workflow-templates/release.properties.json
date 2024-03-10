@@ -1,0 +1,5 @@
+{
+  "name": "Release workflow",
+  "description": "Generate release PRs based on the Conventional Commits specification.",
+  "iconName": "tag"
+}

@@ -6,6 +6,7 @@ on:
     inputs:
       release-type:
         description: "Defines the release strategy to use (e.g., python, node)"
+        default: "simple"
         required: false
         type: string
 
