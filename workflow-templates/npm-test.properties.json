@@ -1,0 +1,5 @@
+{
+  "name": "npm-test",
+  "description": "Runs a predefined command specified in the 'test' property of a package's 'scripts' object.",
+  "iconName": "beaker"
+}
