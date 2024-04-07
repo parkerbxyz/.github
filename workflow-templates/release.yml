@@ -1,16 +1,13 @@
----
-name: release-please
+name: release
 
 on:
-  push:
-    branches: [ $default-branch ]
+  workflow_dispatch:
+  release:
+    types: [released]
 
 permissions:
   contents: write
-  pull-requests: write
 
 jobs:
-  release-please:
-    uses: parkerbxyz/.github/.github/workflows/release-please.yml@main
-    with:
-      release-type: "simple"
+  release:
+    uses: parkerbxyz/.github/.github/workflows/release.yml@main
