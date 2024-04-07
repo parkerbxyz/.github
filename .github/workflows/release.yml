@@ -2,15 +2,6 @@ name: Release
 
 on:
   workflow_call:
-    inputs:
-      app-id:
-        description: "GitHub App ID"
-        required: true
-        type: number
-    secrets:
-      app-private-key:
-        description: "GitHub App private key"
-        required: true
 
 permissions:
   contents: write
@@ -22,8 +13,8 @@ jobs:
       - uses: actions/create-github-app-token@v1
         id: app-token
         with:
-          app-id: ${{ inputs.app-id }}
-          private-key: ${{ secrets.app-private-key }}
+          app-id: ${{ vars.ACTIONS_APP_ID }}
+          private-key: ${{ secrets.ACTIONS_APP_PRIVATE_KEY }}
       - uses: actions/checkout@v4
         with:
           fetch-tags: true
