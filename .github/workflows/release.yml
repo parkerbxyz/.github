@@ -20,6 +20,8 @@ jobs:
           echo "latest=$latest" >> $GITHUB_OUTPUT
           major="$(echo $latest | cut -d. -f1)"
           echo "major=$major" >> $GITHUB_OUTPUT
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Configure Git
         run: |
           git config user.name release-please[bot]
