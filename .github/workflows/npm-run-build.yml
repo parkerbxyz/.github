@@ -1,0 +1,30 @@
+name: npm-run-build
+
+on:
+  workflow_call:
+    inputs:
+      commit-message:
+        description: 'Commit message'
+        type: string
+        default: 'chore: npm run build'
+
+jobs:
+  npm-run-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+      - uses: actions/setup-node@v4
+        with:
+          cache: 'npm'
+      - run: npm ci
+      - name: Run build script
+        id: build
+        run: npm run build
+      - name: Commit changes
+        if: steps.build.conclusion == 'success'
+        uses: stefanzweifel/git-auto-commit-action@8756aa072ef5b4a080af5dc8fef36c5d586e521d # v5.0.0
+        with:
+          commit_author: '${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>'
+          commit_message: ${{ github.event.inputs.commit-message }}

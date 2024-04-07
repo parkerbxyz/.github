@@ -1,0 +1,5 @@
+{
+  "name": "npm-run-build",
+  "description": "Runs a predefined command specified in the 'build' property of a package's 'scripts' object.",
+  "iconName": "package"
+}
