@@ -1,5 +1,5 @@
 {
-  "name": "release-please",
-  "description": "Generate release PRs based on the Conventional Commits specification.",
+  "name": "release",
+  "description": "Update major version tag after release.",
   "iconName": "tag"
 }
