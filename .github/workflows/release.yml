@@ -1,0 +1,31 @@
+name: Release
+
+on:
+  workflow_call:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-tags: true
+      - name: Get tag names
+        id: tags
+        run: |
+          latest=$(gh release view --json tagName --jq .tagName)
+          echo "latest=$latest" >> $GITHUB_OUTPUT
+          major="$(echo $latest | cut -d. -f1)"
+          echo "major=$major" >> $GITHUB_OUTPUT
+      - name: Configure Git
+        run: |
+          git config user.name release-please[bot]
+          git config user.email 55107282+release-please[bot]@users.noreply.github.com
+      - name: Update major version tag
+        run: |
+          # Update (or create) the major version tag to point to the latest release
+          git tag --force ${{ steps.tags.outputs.major }} ${{ steps.tags.outputs.latest }}
+          git push origin ${{ steps.tags.outputs.major }} --force
